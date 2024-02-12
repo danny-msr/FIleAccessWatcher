@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:FileAccessWatcher"
         mc:Ignorable="d"
         Title="File Access Watcher" Height="450" Width="800">
+    <Window.DataContext>
+        <local:FileAccessWatcherViewModel />
+    </Window.DataContext>
     <Grid>
         <DockPanel LastChildFill="True">
             <!--メニュー-->
@@ -39,11 +42,15 @@
                 </Button>
             </StackPanel>
             <!--結果表示-->
-            <DataGrid DockPanel.Dock="Top" Margin="10,0,10,0">
-                <DataGrid.Resources>
-                    
-                </DataGrid.Resources>
-            </DataGrid>
+            <ListView DockPanel.Dock="Top" Margin="10" ItemsSource="{Binding AccessLogItems}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Time" DisplayMemberBinding="{Binding TimeStamp}"/>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Type" DisplayMemberBinding="{Binding watcherChangeTypes}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </DockPanel>
 
     </Grid>
